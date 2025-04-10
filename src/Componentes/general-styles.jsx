@@ -97,6 +97,7 @@ export const Label = styled.p`
   color: grey;
   font-weight: bold;
   margin: 0; 
+  margin-bottom: 10px;
 `
 export const Text = styled.p`
   margin: 0;
