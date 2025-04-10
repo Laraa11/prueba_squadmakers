@@ -11,7 +11,6 @@ const MainPage = () => {
     axios.get('https://rickandmortyapi.com/api/character')
       .then(response => {
         setCharacters(response.data.results)
-        console.log(response.data.results)
       })
       .catch(error => 
         console.error('Error fetching characters:', error)
