@@ -6,16 +6,29 @@ import axios from 'axios';
 
 const MainPage = () => {
   const [characters, setCharacters] = useState([]);
+  const [currentPage, setCurrentPage] = useState('https://rickandmortyapi.com/api/character');
+  const [nextPage, setNextPage] = useState(null);
+  const [prevPage, setPrevPage] = useState(null);
 
   useEffect(() => {
-    axios.get('https://rickandmortyapi.com/api/character')
+    axios.get(currentPage)
       .then(response => {
-        setCharacters(response.data.results)
+        setCharacters(response.data.results);
+        setNextPage(response.data.info.next);
+        setPrevPage(response.data.info.prev);
       })
       .catch(error => 
         console.error('Error fetching characters:', error)
       );
-  }, []);
+  }, [currentPage]);
+
+  const goToNextPage = () => {
+    if (nextPage) setCurrentPage(nextPage);
+  };
+
+  const goToPrevPage = () => {
+    if (prevPage) setCurrentPage(prevPage);
+  };
 
   return (
     <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column', height: '100vh' }}>
@@ -25,14 +38,22 @@ const MainPage = () => {
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(2, 1fr)', 
-          columnGap: '20px',
+          gap: '20px',
         }}
       >
         {characters.map((character, index) => (
-          <div style={{ marginBottom: '10px' }}>
+          <div>
             <CharacterCard character={character} />
           </div>
         ))}
+      </div>
+      <div>
+        <button onClick={goToPrevPage} disabled={!prevPage} style={{ margin: '10px' }}>
+          Anterior
+        </button>
+        <button onClick={goToNextPage} disabled={!nextPage}>
+          Siguiente
+        </button>
       </div>
     </div>
   );

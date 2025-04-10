@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Image, Label, Text, ContentContainer, DetailsContainer, Title, ButtonContent, ButtonFavorite, StarIcon, ButtonStatus, ButtonText, TitleContainer } from './general-styles';
+import { Card, Image, Label, Text, ContentContainer, DetailsContainer, Title, ButtonContent, ButtonFavorite, StarIcon, ButtonStatus, TitleContainer } from './general-styles';
 import { BiCheckCircle, BiHelpCircle, BiXCircle } from 'react-icons/bi';
 import axios from 'axios';
 
