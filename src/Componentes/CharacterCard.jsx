@@ -29,9 +29,9 @@ const CharacterCard = ({ character }) => {
         <ButtonStatus status={character.status}>
           <ButtonContent>
             {character.status === "Alive" && <BiCheckCircle size={16} />}
-            {character.status === "Unknown" && <BiHelpCircle size={16} />}
+            {character.status === "unknown" && <BiHelpCircle size={16} />}
             {character.status === "Dead" && <BiXCircle size={16} />}
-            {character.status}
+            {character.status.charAt(0).toUpperCase() + character.status.slice(1).toLowerCase()}
           </ButtonContent>
         </ButtonStatus>
         </TitleContainer>
