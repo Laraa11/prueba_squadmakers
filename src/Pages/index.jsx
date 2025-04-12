@@ -54,40 +54,41 @@ const MainPage = () => {
 
     <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column', height: '100vh' }}>
       <h1>PRUEBA TÉCNICA SQUAD MAKERS</h1>
-      <div style={{ display: 'flex', alignItems: 'left', width: '100%', marginLeft: '50px' }}>
-        <Filters filterFavorites={filterFavorites} setFilterFavorites={setFilterFavorites} />
-      </div>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
-          gap: '20px',
-        }}
-      >
+      <div style={{ maxWidth: '100%' }}>
+          <Filters filterFavorites={filterFavorites} setFilterFavorites={setFilterFavorites} />
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gap: '20px',
+            minWidth: '1200px',
+          }}
+        >
 
-        {filteredCharacters.length === 0 ? (
-          <p>No hay favoritos seleccionados</p>
-        ) : (
-          filteredCharacters.map((character, index) => (
-            <div key={index}>
-              <CharacterCard
-                character={character}
-                favorites={favorites}
-                handleFavorite={handleFavorite}
-              />
-            </div>
-          ))
+          {filteredCharacters.length === 0 ? (
+            <p>No hay favoritos seleccionados</p>
+          ) : (
+            filteredCharacters.map((character, index) => (
+              <div key={index}>
+                <CharacterCard
+                  character={character}
+                  favorites={favorites}
+                  handleFavorite={handleFavorite}
+                />
+              </div>
+            ))
+          )}
+
+        </div>
+        {filterFavorites !== 'favorites' && (
+          <ChangePageButtons
+            goToPrevPage={goToPrevPage}
+            goToNextPage={goToNextPage}
+            prevPage={prevPage}
+            nextPage={nextPage}
+          />
         )}
-
       </div>
-      {filterFavorites !== 'favorites' && (
-        <ChangePageButtons
-          goToPrevPage={goToPrevPage}
-          goToNextPage={goToNextPage}
-          prevPage={prevPage}
-          nextPage={nextPage}
-        />
-      )}
     </div>
   );
 }

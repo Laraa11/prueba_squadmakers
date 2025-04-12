@@ -1,21 +1,42 @@
-import React from "react";
-import { ButtonFilter, ContainerButtonFilter } from "./general-styles";
+import React, { useState } from "react";
+import { ButtonFilterFavorites, ContainerButtonFilter, FiltersContainer, RoundedButton } from "./general-styles";
+import { VscSettings } from "react-icons/vsc";
+import FilterModal from "./FilterModal";
 
 const Filters = ({ filterFavorites, setFilterFavorites }) => {
+  const [openAdvancedFilterModal, setOpenAdvancedFilterModal] = useState(false);
+
+  const handleOpenFilterModal = () => {
+    if (openAdvancedFilterModal === true) {
+      setOpenAdvancedFilterModal(false);
+    }
+    else {
+      setOpenAdvancedFilterModal(true);
+    }
+  }
 
   return (
-    <ContainerButtonFilter>
-      <ButtonFilter
-        onClick={() => setFilterFavorites('favorites')}
-        isActive={filterFavorites === 'favorites'}>
-        Favorites
-      </ButtonFilter>
-      <ButtonFilter
-        onClick={() => setFilterFavorites('all')}
-        isActive={filterFavorites === 'all'}>
-        All
-      </ButtonFilter>
-    </ContainerButtonFilter>
+    <FiltersContainer>
+      <ContainerButtonFilter>
+        <ButtonFilterFavorites
+          onClick={() => setFilterFavorites('favorites')}
+          isActive={filterFavorites === 'favorites'}>
+          Favorites
+        </ButtonFilterFavorites>
+        <ButtonFilterFavorites
+          onClick={() => setFilterFavorites('all')}
+          isActive={filterFavorites === 'all'}>
+          All
+        </ButtonFilterFavorites>
+      </ContainerButtonFilter>
+      <RoundedButton onClick={handleOpenFilterModal}>
+        <VscSettings size={20} />
+      </RoundedButton>
+      <FilterModal
+        openAdvancedFilterModal={openAdvancedFilterModal}
+        setOpenAdvancedFilterModal={setOpenAdvancedFilterModal}>
+      </FilterModal>
+    </FiltersContainer>
   );
 }
 
