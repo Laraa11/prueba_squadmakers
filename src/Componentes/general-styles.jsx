@@ -111,14 +111,14 @@ export const ContainerButtonFilter = styled.div`
 `;
 
 export const ButtonFilter = styled.button`
-  background-color: white;
-  color: #575B52;
+  ${(props) => props.isActive ? 'background-color: #B6DA8B;' : 'background-color: white;'};
+  color: ${(props) => props.isActive ? '#354E18' : '#575B52'};  
   border: none;
   border-radius: 32px;
   padding: 10px 15px;
   cursor: pointer;
   font-size: 15px;
-  &:hover, &:active, &:focus {
+  &:hover{
     background-color: #B6DA8B;
     color: #354E18;
   }:

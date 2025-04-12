@@ -55,7 +55,7 @@ const MainPage = () => {
     <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column', height: '100vh' }}>
       <h1>PRUEBA TÉCNICA SQUAD MAKERS</h1>
       <div style={{ display: 'flex', alignItems: 'left', width: '100%', marginLeft: '50px' }}>
-        <Filters setFilterFavorites={setFilterFavorites} />
+        <Filters filterFavorites={filterFavorites} setFilterFavorites={setFilterFavorites} />
       </div>
       <div
         style={{

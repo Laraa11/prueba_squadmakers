@@ -1,5 +1,4 @@
 import React from "react";
-import { ButtonFavorite } from "./general-styles";
 
 const ChangePageButtons = ({ goToPrevPage, goToNextPage, prevPage, nextPage }) => {
   
