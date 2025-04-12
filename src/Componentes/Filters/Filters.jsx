@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { ButtonFilterFavorites, ContainerButtonFilter, FiltersContainer, RoundedButton } from "./general-styles";
+import { ButtonFilterFavorites, ContainerButtonFilter, FiltersContainer } from "./filter-styles";
+import { RoundedButton } from "../general-styles";
 import { VscSettings } from "react-icons/vsc";
 import FilterModal from "./FilterModal";
 
-const Filters = ({ filterFavorites, setFilterFavorites }) => {
+const Filters = ({ filterFavorites, setFilterFavorites, filterAdvanced, setFilterAdvanced }) => {
   const [openAdvancedFilterModal, setOpenAdvancedFilterModal] = useState(false);
-
+  
   const handleOpenFilterModal = () => {
     if (openAdvancedFilterModal === true) {
       setOpenAdvancedFilterModal(false);
@@ -34,7 +35,10 @@ const Filters = ({ filterFavorites, setFilterFavorites }) => {
       </RoundedButton>
       <FilterModal
         openAdvancedFilterModal={openAdvancedFilterModal}
-        setOpenAdvancedFilterModal={setOpenAdvancedFilterModal}>
+        setOpenAdvancedFilterModal={setOpenAdvancedFilterModal}
+        filterAdvanced={filterAdvanced}
+        setFilterAdvanced={setFilterAdvanced}
+      >
       </FilterModal>
     </FiltersContainer>
   );

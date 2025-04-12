@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Card, Image, Label, Text, ContentContainer, DetailsContainer, Title, ButtonContent, ButtonFavorite, StarIcon, ButtonStatus, TitleContainer } from './general-styles';
+import { Card, Image, Label, Text, ContentContainer, DetailsContainer, Title,
+   ButtonContent, ButtonFavorite, StarIcon, ButtonStatus, TitleContainer } from './general-styles';
 import { BiCheckCircle, BiHelpCircle, BiXCircle } from 'react-icons/bi';
 
 const CharacterCard = ({ character, favorites, handleFavorite }) => {
@@ -35,7 +36,7 @@ const CharacterCard = ({ character, favorites, handleFavorite }) => {
               {character.status === "Alive" && <BiCheckCircle size={16} />}
               {character.status === "unknown" && <BiHelpCircle size={16} />}
               {character.status === "Dead" && <BiXCircle size={16} />}
-              {character.status.charAt(0).toUpperCase() + character.status.slice(1).toLowerCase()}
+              {character.status[0].toUpperCase() + character.status.slice(1)}
             </ButtonContent>
           </ButtonStatus>
         </TitleContainer>
