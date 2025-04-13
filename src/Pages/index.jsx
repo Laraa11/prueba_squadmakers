@@ -12,7 +12,7 @@ const MainPage = () => {
   const [currentPage, setCurrentPage] = useState('https://rickandmortyapi.com/api/character');
   const [nextPage, setNextPage] = useState(null);
   const [prevPage, setPrevPage] = useState(null);
-  const [favorites, setFavorites] = useState('');
+  const [favorites, setFavorites] = useState([]);
   const [total, setTotal] = useState(0);
   const [filterFavorites, setFilterFavorites] = useState('all');
   const [filterAdvanced, setFilterAdvanced] = useState({
@@ -50,6 +50,17 @@ const MainPage = () => {
     // setTotal(characters.length)
   }
 
+  // useEffect(() => {
+  //   if (filterFavorites === 'favorites') {
+  //     const totalFavorites = characters.filter((character) =>
+  //       favorites.includes(character.id)
+  //     ).length;
+  //     setTotal(totalFavorites);
+  //   } else {
+  //     setTotal(filteredCharacters.length);
+  //   }
+  // }, [filterFavorites, favorites]);
+
   useEffect(() => {
     let newParams = '';
     if (filterAdvanced.Species !== '') {
@@ -66,8 +77,6 @@ const MainPage = () => {
       newParams = newParams.slice(0, -1);
     }
     setParams(newParams)
-
-    console.log(params)
   }, [filterAdvanced])
 
   useEffect(() => {
@@ -108,11 +117,11 @@ const MainPage = () => {
           filterAdvanced={filterAdvanced}
           setFilterAdvanced={setFilterAdvanced}
         />
-        <FiltersSelectedAndTotal
-          filterAdvanced={filterAdvanced}
-          setFilterAdvanced={setFilterAdvanced}
-          total={total}
-        />
+          <FiltersSelectedAndTotal
+            filterAdvanced={filterAdvanced}
+            setFilterAdvanced={setFilterAdvanced}
+            total={total}
+          />
         <div
           style={{
             display: 'grid',
@@ -139,7 +148,7 @@ const MainPage = () => {
 
         </div>
       </div>
-       {/*TODO: Estilos botones de cambio de página */}
+      {/*TODO: Estilos botones de cambio de página */}
       <ChangePageButtons
         goToPrevPage={goToPrevPage}
         goToNextPage={goToNextPage}

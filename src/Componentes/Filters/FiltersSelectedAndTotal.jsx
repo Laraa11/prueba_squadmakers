@@ -3,41 +3,45 @@ import { FilterSelectedAndTotalContainer, FiltersSelected, Text } from "./filter
 import { ButtonFilter } from "./filter-styles";
 import { RxCrossCircled } from "react-icons/rx";
 
-
 const FiltersSelectedAndTotal = ({ filterAdvanced, setFilterAdvanced, total }) => {
+  const { Species, Gender, Status } = filterAdvanced;
+
+  const handleFilter = (filterName) => {
+    setFilterAdvanced((prev) => ({
+      ...prev,
+      [filterName]: '',
+    }));
+  };
+
+  const anyFilterActive = Species || Gender || Status;
 
   return (
     <FilterSelectedAndTotalContainer>
       <div>
-        {Object.values(filterAdvanced).some((val) => val) && (
-          <Text>Filtros Aplicados</Text>
-        )}
+        {anyFilterActive && <Text>Filtros Aplicados</Text>}
+
         <FiltersSelected>
-          {Object.entries(filterAdvanced).map(([category, value]) => {
-            if (value) {
-              return (
-                <ButtonFilter
-                  key={category}
-                  isButtonSelected={true}
-                  onClick={() =>
-                    setFilterAdvanced((prev) => ({
-                      ...prev,
-                      [category]: '',
-                    }))
-                  }
-                >
-                  {value} <RxCrossCircled />
-                </ButtonFilter>
-              );
-            }
-            return null;
-          })}
+          {Species && (
+            <ButtonFilter isButtonSelected onClick={() => handleFilter('Species')}>
+              {Species} <RxCrossCircled />
+            </ButtonFilter>
+          )}
+          {Gender && (
+            <ButtonFilter isButtonSelected onClick={() => handleFilter('Gender')}>
+              {Gender} <RxCrossCircled />
+            </ButtonFilter>
+          )}
+          {Status && (
+            <ButtonFilter isButtonSelected onClick={() => handleFilter('Status')}>
+              {Status} <RxCrossCircled />
+            </ButtonFilter>
+          )}
         </FiltersSelected>
       </div>
+
       <Text>{total} personajes</Text>
     </FilterSelectedAndTotalContainer>
-  )
-
-}
+  );
+};
 
 export default FiltersSelectedAndTotal;
