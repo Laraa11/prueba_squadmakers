@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 import CharacterCard from '../Componentes/CharacterCard.jsx';
 import axios from 'axios';
 import ChangePageButtons from '../Componentes/ChangePage.jsx';
-import Filters from '../Componentes/Filters/Filters.jsx';
 import FiltersSelectedAndTotal from '../Componentes/Filters/FiltersSelectedAndTotal.jsx';
+import FiltersFavoritesAndAdvanced from '../Componentes/Filters/FiltersFavoritesAndAdvanced.jsx';
+import { CardsContainer, FiltersContainer, MainPageContainer } from './page-style.jsx';
 // import { characters } from './utils/data.js';
 
 const MainPage = () => {
@@ -109,28 +110,20 @@ const MainPage = () => {
   // TODO: responsive
   return (
 
-    <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column', height: '100vh' }}>
-      <div style={{ maxWidth: '100%', marginTop: '20px' }}>
-        <Filters
+    <MainPageContainer>
+      <FiltersContainer>
+        <FiltersFavoritesAndAdvanced
           filterFavorites={filterFavorites}
           setFilterFavorites={setFilterFavorites}
           filterAdvanced={filterAdvanced}
           setFilterAdvanced={setFilterAdvanced}
         />
-          <FiltersSelectedAndTotal
-            filterAdvanced={filterAdvanced}
-            setFilterAdvanced={setFilterAdvanced}
-            total={total}
-          />
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: '20px',
-            minWidth: '1200px',
-          }}
-        >
-
+        <FiltersSelectedAndTotal
+          filterAdvanced={filterAdvanced}
+          setFilterAdvanced={setFilterAdvanced}
+          total={total}
+        />
+        <CardsContainer>
           {filteredCharacters.length === 0 ? (
             <p>No hay favoritos seleccionados en esta página</p> //TODO: Unificar todos los favoritos en una página
           ) : (
@@ -146,8 +139,8 @@ const MainPage = () => {
           )}
           {/*TODO: No mostrar si no se puede cambiar de página */}
 
-        </div>
-      </div>
+        </CardsContainer>
+      </FiltersContainer>
       {/*TODO: Estilos botones de cambio de página */}
       <ChangePageButtons
         goToPrevPage={goToPrevPage}
@@ -155,7 +148,7 @@ const MainPage = () => {
         prevPage={prevPage}
         nextPage={nextPage}
       />
-    </div>
+    </MainPageContainer>
   );
 }
 

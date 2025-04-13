@@ -4,7 +4,7 @@ import { RoundedButton } from "../general-styles";
 import { VscSettings } from "react-icons/vsc";
 import FilterModal from "./FilterModal";
 
-const Filters = ({ filterFavorites, setFilterFavorites, filterAdvanced, setFilterAdvanced }) => {
+const FiltersFavoritesAndAdvanced = ({ filterFavorites, setFilterFavorites, filterAdvanced, setFilterAdvanced }) => {
   const [openAdvancedFilterModal, setOpenAdvancedFilterModal] = useState(false);
   
   const handleOpenFilterModal = () => {
@@ -44,4 +44,4 @@ const Filters = ({ filterFavorites, setFilterFavorites, filterAdvanced, setFilte
   );
 }
 
-export default Filters;
+export default FiltersFavoritesAndAdvanced;
