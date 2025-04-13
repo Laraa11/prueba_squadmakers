@@ -27,6 +27,7 @@ const CharacterCard = ({ character, favorites, handleFavorite }) => {
       <ButtonFavorite onClick={handleClickFavorite} isFavorite={isFavorite}>
         <StarIcon isFavorite={isFavorite} />
       </ButtonFavorite>
+      {/* TODO: spinner cuando esté cargando la imagen*/}
       <Image src={character.image} />
       <ContentContainer>
         <TitleContainer>

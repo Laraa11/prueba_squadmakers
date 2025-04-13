@@ -1,20 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ContainerModalBody, ContainerModalFooter, ContainerModalTitle, ModalAcceptButton, 
   ModalCloseButton, ModalContainer, ModalTitle } from "./filter-styles";
 import { RxCross1 } from "react-icons/rx";
 import FilterCategory from "./FilterCategory";
 
-const FilterModal = ({ openAdvancedFilterModal, setOpenAdvancedFilterModal, setFilterAdvanced }) => {
+const FilterModal = ({ openAdvancedFilterModal, setOpenAdvancedFilterModal, setFilterAdvanced, filterAdvanced }) => {
   const [filterToSearch, setFilterToSearch] = useState({
     Species: '',
     Gender: '',
-    State: ''
+    Status: ''
   });
 
   const handleAccept = () => {
     setOpenAdvancedFilterModal(false)
     setFilterAdvanced(filterToSearch)
   }
+
+  useEffect(() => {
+    if (openAdvancedFilterModal) {
+      setFilterToSearch(filterAdvanced)
+    }
+  }, [openAdvancedFilterModal, filterAdvanced])
+  
   
   return (
     <>
@@ -30,18 +37,18 @@ const FilterModal = ({ openAdvancedFilterModal, setOpenAdvancedFilterModal, setF
           <ContainerModalBody>
             <FilterCategory
               category="Species"
-              options={["Human", "Cronenbergs", "Meeseeks", "Mythological Creature"]}
+              options={["Human", "Alien", "Humanoid", "Mythological Creature"]}
               filterToSearch={filterToSearch}
               setFilterToSearch={setFilterToSearch}
             />
             <FilterCategory
               category="Gender"
-              options={["Male", "Female", "Unknown", "Genderless"]}
+              options={["Male", "Female", "Unknown"]}
               filterToSearch={filterToSearch}
               setFilterToSearch={setFilterToSearch}
             />
             <FilterCategory
-              category="State"
+              category="Status"
               options={["Alive", "Dead"]}
               filterToSearch={filterToSearch}
               setFilterToSearch={setFilterToSearch}
