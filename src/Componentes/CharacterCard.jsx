@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, Image, Label, Text, ContentContainer, DetailsContainer, Title,
-   ButtonContent, ButtonFavorite, StarIcon, ButtonStatus, TitleContainer } from './general-styles';
+  ButtonContent, ButtonFavorite, StarIcon, ButtonStatus, TitleContainer } from './general-styles';
 import { BiCheckCircle, BiHelpCircle, BiXCircle } from 'react-icons/bi';
 
 const CharacterCard = ({ character, favorites, handleFavorite }) => {

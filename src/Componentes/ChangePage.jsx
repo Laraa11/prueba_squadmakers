@@ -5,10 +5,10 @@ const ChangePageButtons = ({ goToPrevPage, goToNextPage, prevPage, nextPage }) =
   return (
     <div>
       <button onClick={goToPrevPage} disabled={!prevPage} style={{ margin: '10px' }}>
-        Anterior
+        Previus Page
       </button>
       <button onClick={goToNextPage} disabled={!nextPage}>
-        Siguiente
+        Next Page
       </button>
     </div>
   );

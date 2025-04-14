@@ -55,7 +55,7 @@ const FilterModal = ({ openAdvancedFilterModal, setOpenAdvancedFilterModal, setF
             />
           </ContainerModalBody>
           <ContainerModalFooter>
-            <ModalAcceptButton onClick={handleAccept}>Aplicar Filtros</ModalAcceptButton>
+            <ModalAcceptButton onClick={handleAccept}>Apply Filters</ModalAcceptButton>
           </ContainerModalFooter>
 
         </ModalContainer>

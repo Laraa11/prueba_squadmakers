@@ -10,6 +10,7 @@ export const MainPageContainer = styled.div `
 export const FiltersContainer = styled.div `
   max-width: 100%;
   margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
 export const CardsContainer = styled.div `

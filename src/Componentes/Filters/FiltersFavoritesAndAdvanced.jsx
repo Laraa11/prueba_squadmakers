@@ -30,9 +30,11 @@ const FiltersFavoritesAndAdvanced = ({ filterFavorites, setFilterFavorites, filt
           All
         </ButtonFilterFavorites>
       </ContainerButtonFilter>
+      {filterFavorites !== 'favorites' && (
       <RoundedButton onClick={handleOpenFilterModal}>
         <VscSettings size={20} />
       </RoundedButton>
+      )}
       <FilterModal
         openAdvancedFilterModal={openAdvancedFilterModal}
         setOpenAdvancedFilterModal={setOpenAdvancedFilterModal}

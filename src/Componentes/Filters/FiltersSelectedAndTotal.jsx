@@ -3,7 +3,7 @@ import { FilterSelectedAndTotalContainer, FiltersSelected, Text } from "./filter
 import { ButtonFilter } from "./filter-styles";
 import { RxCrossCircled } from "react-icons/rx";
 
-const FiltersSelectedAndTotal = ({ filterAdvanced, setFilterAdvanced, total }) => {
+const FiltersSelectedAndTotal = ({ filterAdvanced, setFilterAdvanced, total, filterFavorites }) => {
   const { Species, Gender, Status } = filterAdvanced;
 
   const handleFilter = (filterName) => {
@@ -17,29 +17,29 @@ const FiltersSelectedAndTotal = ({ filterAdvanced, setFilterAdvanced, total }) =
 
   return (
     <FilterSelectedAndTotalContainer>
-      <div>
-        {anyFilterActive && <Text>Filtros Aplicados</Text>}
-
-        <FiltersSelected>
-          {Species && (
-            <ButtonFilter isButtonSelected onClick={() => handleFilter('Species')}>
-              {Species} <RxCrossCircled />
-            </ButtonFilter>
-          )}
-          {Gender && (
-            <ButtonFilter isButtonSelected onClick={() => handleFilter('Gender')}>
-              {Gender} <RxCrossCircled />
-            </ButtonFilter>
-          )}
-          {Status && (
-            <ButtonFilter isButtonSelected onClick={() => handleFilter('Status')}>
-              {Status} <RxCrossCircled />
-            </ButtonFilter>
-          )}
-        </FiltersSelected>
-      </div>
-
-      <Text>{total} personajes</Text>
+      {filterFavorites !== 'favorites' && (
+        <div>
+          {anyFilterActive && <Text>Applied Filters</Text>}
+          <FiltersSelected>
+            {Species && (
+              <ButtonFilter isButtonSelected onClick={() => handleFilter('Species')}>
+                {Species} <RxCrossCircled />
+              </ButtonFilter>
+            )}
+            {Gender && (
+              <ButtonFilter isButtonSelected onClick={() => handleFilter('Gender')}>
+                {Gender} <RxCrossCircled />
+              </ButtonFilter>
+            )}
+            {Status && (
+              <ButtonFilter isButtonSelected onClick={() => handleFilter('Status')}>
+                {Status} <RxCrossCircled />
+              </ButtonFilter>
+            )}
+          </FiltersSelected>
+        </div>
+      )}
+      <Text>{total} characters</Text>
     </FilterSelectedAndTotalContainer>
   );
 };

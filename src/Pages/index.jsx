@@ -40,27 +40,54 @@ const MainPage = () => {
     });
   };
 
-  // TODO: Contar favoritos
-  let filteredCharacters = characters;
-  if (filterFavorites === 'favorites') {
-    filteredCharacters = characters.filter((character) => favorites.includes(character.id));
-    // const totalFavorites = characters.filter((character) => (favorites.includes(character.id))).length
-    // setTotal(totalFavorites)
-  }
-  else {
-    // setTotal(characters.length)
-  }
+  useEffect(() => {
+    if (filterFavorites === 'all') {
+      if (params !== '') {
+        axios.get(`https://rickandmortyapi.com/api/character/?${params}`)
+          .then(response => {
+            setCharacters(response.data.results);
+            setTotal(response.data.info.count)
+            setNextPage(response.data.info.next);
+            setPrevPage(response.data.info.prev);
+          })
+          .catch(error =>
+            console.error('Error fetching characters:', error)
+          );
+      }
+      else {
+        axios.get(currentPage)
+          .then(response => {
+            setCharacters(response.data.results);
+            setTotal(response.data.info.count)
+            setNextPage(response.data.info.next);
+            setPrevPage(response.data.info.prev);
+          })
+          .catch(error =>
+            console.error('Error fetching characters:', error)
+          );
+      }
+    }
+  }, [currentPage, filterFavorites, params]);
 
-  // useEffect(() => {
-  //   if (filterFavorites === 'favorites') {
-  //     const totalFavorites = characters.filter((character) =>
-  //       favorites.includes(character.id)
-  //     ).length;
-  //     setTotal(totalFavorites);
-  //   } else {
-  //     setTotal(filteredCharacters.length);
-  //   }
-  // }, [filterFavorites, favorites]);
+  useEffect(() => {
+    if (filterFavorites === 'favorites') {
+      if (favorites.length > 0) {
+        axios.get(`https://rickandmortyapi.com/api/character/${favorites}`)
+          .then(response => {
+            const charactersData = Array.isArray(response.data) ? response.data : [response.data]
+            setCharacters(charactersData);
+            setTotal(charactersData.length)
+          })
+          .catch(error =>
+            console.error('Error fetching characters:', error)
+          );
+      }
+      else {
+        setCharacters([])
+        setTotal(0)
+      }
+    }
+  }, [favorites, filterFavorites]);
 
   useEffect(() => {
     let newParams = '';
@@ -80,33 +107,6 @@ const MainPage = () => {
     setParams(newParams)
   }, [filterAdvanced])
 
-  useEffect(() => {
-    axios.get(`https://rickandmortyapi.com/api/character/?${params}`)
-      .then(response => {
-        setCharacters(response.data.results);
-        setTotal(response.data.info.count)
-        setNextPage(response.data.info.next);
-        setPrevPage(response.data.info.prev);
-      })
-      .catch(error =>
-        console.error('Error fetching characters:', error)
-      );
-  }, [params])
-
-
-  useEffect(() => {
-    axios.get(currentPage)
-      .then(response => {
-        setCharacters(response.data.results);
-        setTotal(response.data.info.count)
-        setNextPage(response.data.info.next);
-        setPrevPage(response.data.info.prev);
-      })
-      .catch(error =>
-        console.error('Error fetching characters:', error)
-      );
-  }, [currentPage]);
-
   // TODO: responsive
   return (
 
@@ -122,12 +122,13 @@ const MainPage = () => {
           filterAdvanced={filterAdvanced}
           setFilterAdvanced={setFilterAdvanced}
           total={total}
+          filterFavorites={filterFavorites}
         />
         <CardsContainer>
-          {filteredCharacters.length === 0 ? (
-            <p>No hay favoritos seleccionados en esta página</p> //TODO: Unificar todos los favoritos en una página
+          {characters.length === 0 ? (
+            <p>There are no characters</p>
           ) : (
-            filteredCharacters.map((character, index) => (
+            characters.map((character, index) => (
               <div key={index}>
                 <CharacterCard
                   character={character}
@@ -137,17 +138,18 @@ const MainPage = () => {
               </div>
             ))
           )}
-          {/*TODO: No mostrar si no se puede cambiar de página */}
 
         </CardsContainer>
       </FiltersContainer>
       {/*TODO: Estilos botones de cambio de página */}
-      <ChangePageButtons
-        goToPrevPage={goToPrevPage}
-        goToNextPage={goToNextPage}
-        prevPage={prevPage}
-        nextPage={nextPage}
-      />
+      {filterFavorites !== 'favorites' && (
+        <ChangePageButtons
+          goToPrevPage={goToPrevPage}
+          goToNextPage={goToNextPage}
+          prevPage={prevPage}
+          nextPage={nextPage}
+        />
+      )}
     </MainPageContainer>
   );
 }

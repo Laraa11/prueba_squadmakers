@@ -10,6 +10,7 @@ export const Text = styled.p`
   color: #333630;
   font-size: 22px;
   font-weight: bold;
+  margin-left: auto;
 `;
 
 export const FiltersSelected = styled.div`
@@ -61,7 +62,7 @@ export const ButtonFilterFavorites = styled.button`
   &:hover{
     background-color: #B6DA8B;
     color: #354E18;
-  }:
+  }
 `;
 
 //FILTERMODAL STYLES
